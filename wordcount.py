@@ -6,23 +6,20 @@
 
 #for key in dictionary, print key, value
 
-def wordcounter(ourtextfile):
+def count_words(ourtextfile):
     fileobject = open(ourtextfile)
     masterlist = []
-    dict_of_words = {}
+    word_counter = {}
     for line in fileobject:
-        list_of_words = line.split(" ")
-        for word in list_of_words:
+        words = line.split(" ")
+        for word in words:
             word = word.lower().rstrip().rstrip("!.,?")
             masterlist.append(word)
-            dict_of_words[word]=0
-    print masterlist, "MASTERLIST"
-    for uniqueword in dict_of_words:
-        for i in masterlist:
-            if i == uniqueword:
-                dict_of_words[uniqueword]+=1
-        print dict_of_words[uniqueword], uniqueword
-    # print dict_of_words, "DICT OF WORDS"
-    return 10
+            if word in word_counter:
+                word_counter[word] = word_counter[word]+1
+            else:
+                word_counter[word] = 1
+    # print word_counter, "DICT OF WORDS"
+    return word_counter
 
-wordcounter("test.txt")
+my_tallies = count_words("test.txt")
